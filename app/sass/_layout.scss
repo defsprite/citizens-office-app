@@ -3,6 +3,7 @@
 //===============================================================================
 .wrap{
   margin: 0 auto;
-  width: 90%;
   max-width: $wrap-width;
+  background-color: $paper;
+  padding: 20px 20px;
 }

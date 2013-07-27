@@ -164,10 +164,10 @@ table {
   -webkit-font-smoothing: antialiased; }
 
 body {
-  background-color: white;
-  color: black;
+  background-color: #d9d9d9;
+  color: #29303d;
   font-size: 1.0625em;
-  font-family: "museo-sans", sans-serif;
+  font-family: "museo-sans", serif;
   line-height: 1.4; }
 
 h1, h2, h3, h4, h5, h6,
@@ -201,7 +201,7 @@ a {
 blockquote {
   margin: 0;
   padding: 0 2em;
-  border-left: 0.2em solid black;
+  border-left: 0.2em solid #29303d;
   font-style: italic; }
   blockquote p:before {
     margin: 0 .2em 0 -.6em;
@@ -215,7 +215,7 @@ pre {
   -webkit-border-radius: 0.2em;
   border-radius: 0.2em;
   padding: .85em 1.05em;
-  background-color: #333333;
+  background-color: #525f7a;
   color: white; }
 
 p code,
@@ -231,7 +231,7 @@ p samp {
 hr {
   margin: 2em 0;
   border: 0;
-  border-top: 1px dashed black; }
+  border-top: 1px dashed #29303d; }
 
 button, .btn,
 input[type="button"],
@@ -265,13 +265,20 @@ input[type="submit"] {
   display: table;
   clear: both; }
 
+.left {
+  float: left; }
+
+.right {
+  float: right; }
+
 .wrap {
   margin: 0 auto;
-  width: 90%;
-  max-width: 38em; }
+  max-width: 768px;
+  background-color: white;
+  padding: 20px 20px; }
 
 h1, h2, h3, h4, h5, h6 {
-  color: black; }
+  color: #29303d; }
 
 .tera,
 .giga,
@@ -341,3 +348,13 @@ h5 {
 
 h6 {
   margin-bottom: 0.8em; }
+
+img.logo {
+  margin: 0 20px 0 5px;
+  width: 100px;
+  background-color: #e53451; }
+
+h1.logo {
+  font-size: 53px;
+  line-height: .9;
+  padding-top: 24px; }
