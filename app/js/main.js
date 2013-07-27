@@ -96,6 +96,6 @@ CocsBackground.prototype = {
 };
 
 
-var cocs = new CocsBackground();
-cocs.connect();
+// var cocs = new CocsBackground();
+// cocs.connect();
 

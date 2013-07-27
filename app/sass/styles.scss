@@ -52,10 +52,10 @@ img.logo{
 }
 
 h1.logo{
-  font-size: 53px;
+  font-size: 50px;
   line-height: .9;
   padding-top: 24px;
-  margin-bottom: 1em;
+  margin-bottom: 80px;
 }
 
 .data{
@@ -65,10 +65,15 @@ h1.logo{
   height: 509px;
   overflow: hidden;
   line-height: 1.6;
+  margin-bottom: 80px;
 
   li{
     @extend .clear-fix;
-    border-bottom: 1px dashed hsl(220, 100, 80);
+    padding: 0 10px;
+
+    &:nth-child(odd){
+      background-color: hsl(200 ,100, 97);
+    }
   }
 }
 
@@ -80,4 +85,73 @@ h1.logo{
 
 .time{
   float: right;
+}
+
+footer{
+  height: 140px;
+  border-top: 1px solid desaturate(lighten($ink, 70), 20);
+  padding-top: 25px;
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  width: 768px - 80;
+}
+
+div.mini-logo{
+  width: 240px;
+}
+
+img.mini-logo{
+  width: 34px;
+  margin: -9px 4px 0 0;
+}
+
+h1.mini-logo{
+  font-size: 18px;
+  line-height: .9;
+  color: desaturate(lighten($ink, 30), 20);
+  margin-bottom: 20px;
+}
+
+.footer-text{
+  text-align: right;
+  padding-left: 200px;
+  font-size: 12px;
+}
+
+[class*="panel"]{
+  position: absolute;
+  top: 40px;
+  background-color: $paper;
+  width: 768px - 80;
+  height: 700px;
+  transition: left .3s;
+
+
+  &.off-left{
+    left: 768px;
+  }
+}
+
+.panel-1{
+  left: 40px;
+}
+
+.panel-2{
+  left: 40px;
+
+  .logo{
+    width: 400px;
+    margin-left: ((768px - 480) / 2);
+    margin-top: 30px;
+  }
+
+  h1{
+    color: #E53451;
+    text-align: center;
+    font-size: 90px;
+    margin-top: 30px;
+  }
+
+
 }
