@@ -6,7 +6,7 @@ require 'websocket-eventmachine-client'
 FIELDS = %w(ip.src udp.src wlan.sa dns.qry.name http.request.full_uri http.user_agent).map { |field| "-e #{field}" }
 
 TSHARK = <<-BASH
-  tshark -2 -R 'dns.qry.type == ANY || http.request.full_uri' -T fields #{FIELDS.join(" ")} -i en1 -I -l -N mntNC
+  tshark -2 -R 'dns.qry.type == ANY || http.request.full_uri' -T fields #{FIELDS.join(" ")} -i #{ARGV[0]} -I -l -N mntNC
 BASH
 
 ws = nil
