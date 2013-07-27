@@ -54,7 +54,7 @@ end
 
 EventMachine.run do
 
-  ws = WebSocket::EventMachine::Client.connect(:uri => 'ws://localhost:1984/sniffer')
+  ws = WebSocket::EventMachine::Client.connect(:uri => "ws://#{ARGV[1]}/sniffer")
   PipeHandler.webservice(ws)
 
   ws.onopen do
