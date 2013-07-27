@@ -212,3 +212,31 @@ h1.mini-logo{
   0%   { padding: 0; }
   100% { padding: 30px; }
 }
+
+.panel-4{
+  .user{
+    background-color: $red;
+    padding: 20px 24px;
+    width: 200px;
+    border-radius: 4px;
+
+    margin-bottom: 70px;
+  }
+
+  .user-header span{
+    font-weight: 300;
+    display: block;
+    text-align: right;
+    width: 480px;
+    font-size: 52px;
+    line-height: 1;
+  }
+
+  .name{
+    color: $red;
+  }
+
+  .data{
+    height: 420px;
+  }
+}

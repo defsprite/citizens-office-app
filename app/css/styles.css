@@ -352,6 +352,10 @@ h5 {
 h6 {
   margin-bottom: 0.8em; }
 
+b,
+strong {
+  font-weight: 700; }
+
 img.logo {
   margin: 0 20px 0 5px;
   width: 100px; }
@@ -489,3 +493,21 @@ h1.mini-logo {
 
   100% {
     padding: 30px; } }
+
+.panel-4 .user {
+  background-color: #e53451;
+  padding: 20px 24px;
+  width: 200px;
+  border-radius: 4px;
+  margin-bottom: 70px; }
+.panel-4 .user-header span {
+  font-weight: 300;
+  display: block;
+  text-align: right;
+  width: 480px;
+  font-size: 52px;
+  line-height: 1; }
+.panel-4 .name {
+  color: #e53451; }
+.panel-4 .data {
+  height: 420px; }
