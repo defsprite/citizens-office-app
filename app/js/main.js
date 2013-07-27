@@ -35,6 +35,8 @@ CocsBackground.prototype = {
         var data = event.data;
         this.log('event: ' + event);
         this.log('data: ' + data);
+        $("#content").append(data);
+        $("#content").append("<br/>");
     },
 
     _onclose: function(e) {
