@@ -351,7 +351,8 @@ h6 {
 
 img.logo {
   margin: 0 20px 0 5px;
-  width: 100px; }
+  width: 100px;
+  background-color: #29303d; }
 
 h1.logo {
   font-size: 53px;
