@@ -55,4 +55,29 @@ h1.logo{
   font-size: 53px;
   line-height: .9;
   padding-top: 24px;
+  margin-bottom: 1em;
+}
+
+.data{
+  font-size: 24px;
+  font-weight: 300;
+  color: saturate($ink, 30);
+  height: 509px;
+  overflow: hidden;
+  line-height: 1.6;
+
+  li{
+    @extend .clear-fix;
+    border-bottom: 1px dashed hsl(220, 100, 80);
+  }
+}
+
+.name,
+.site,
+.time{
+  font-weight: 600;
+}
+
+.time{
+  float: right;
 }

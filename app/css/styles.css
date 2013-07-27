@@ -260,7 +260,7 @@ input[type="submit"] {
   list-style: disc;
   padding-left: 1em; }
 
-.clear-fix:after {
+.clear-fix:after, .data li:after {
   content: "";
   display: table;
   clear: both; }
@@ -274,6 +274,7 @@ input[type="submit"] {
 .wrap {
   margin: 0 auto;
   max-width: 768px;
+  height: 1004px;
   background-color: white;
   padding: 20px 20px; }
 
@@ -356,4 +357,23 @@ img.logo {
 h1.logo {
   font-size: 53px;
   line-height: .9;
-  padding-top: 24px; }
+  padding-top: 24px;
+  margin-bottom: 1em; }
+
+.data {
+  font-size: 24px;
+  font-weight: 300;
+  color: #192a4d;
+  height: 509px;
+  overflow: hidden;
+  line-height: 1.6; }
+  .data li {
+    border-bottom: 1px dashed #99bbff; }
+
+.name,
+.site,
+.time {
+  font-weight: 600; }
+
+.time {
+  float: right; }
