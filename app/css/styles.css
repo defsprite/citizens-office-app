@@ -438,9 +438,10 @@ h1.mini-logo {
   .panel-3 h1 {
     color: #e53451;
     font-weight: 900;
-    font-size: 90px;
+    font-size: 70px;
     letter-spacing: 3px;
-    margin-top: 50px; }
+    margin-top: 70px;
+    margin-bottom: 20px; }
   .panel-3 .alert {
     width: 100%; }
   .panel-3 h2 {
