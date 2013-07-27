@@ -1,33 +1,62 @@
 #!/usr/bin/env ruby
 require 'rubygems'
-require 'pcaplet'
+require 'eventmachine'
+require 'websocket-eventmachine-client'
 
-include Pcap
+FIELDS = %w(ip.src udp.src wlan.sa dns.qry.name http.request.full_uri http.user_agent).map { |field| "-e #{field}" }
 
-httpdump = Pcaplet.new('-s 1500 -i en1 -L 802.11')
+TSHARK = <<-BASH
+  tshark -2 -R 'dns.qry.type == ANY || http.request.full_uri' -T fields #{FIELDS.join(" ")} -i en1 -l -N mntC
+BASH
 
-HTTP_REQUEST  = Pcap::Filter.new('tcp and dst port 80', httpdump.capture)
-HTTP_RESPONSE = Pcap::Filter.new('tcp and src port 80', httpdump.capture)
+ws = nil
 
+module PipeHandler
 
-class Time
-  # tcpdump style format
-  def to_s
-    sprintf "%0.2d:%0.2d:%0.2d.%0.6d", hour, min, sec, tv_usec
+  def receive_data data
+    puts "Sending #{data}"
+    @@ws.send(data)
   end
+
+  def unbind
+    puts "exited with status: #{get_status.exitstatus}"
+  end
+
+  def self.webservice service
+    @@ws = service
+  end
+
 end
 
-pcaplet = Pcaplet.new
-pcaplet.each_packet { |pkt|
-  print "#{pkt.time} #{pkt}"
-  if pkt.tcp?
-    print " (#{pkt.tcp_data_len})"
-    print " ack #{pkt.tcp_ack}" if pkt.tcp_ack?
-    print " win #{pkt.tcp_win}"
+
+EventMachine.run do
+
+  ws = WebSocket::EventMachine::Client.connect(:uri => 'ws://localhost:1984/sniffer')
+  PipeHandler.webservice(ws)
+
+  ws.onopen do
+    puts "Connected to Server!"
   end
-  if pkt.ip?
-    print " (DF)" if pkt.ip_df?
+
+  ws.onmessage do |msg, type|
+    puts "Received message: #{msg}"
   end
-  print "\n"
-}
-pcaplet.close
+
+  ws.onclose do
+    puts "Disconnected from Server"
+  end
+
+  EventMachine.popen("#{TSHARK}", PipeHandler)
+
+end
+
+
+
+
+
+
+
+
+
+
+

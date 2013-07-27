@@ -3,17 +3,21 @@
 require 'em-websocket'
 
 websockets = []
-count      = 0
+sniffer = nil
+
+
+
+
 
 EM.run {
 
-  EM.add_periodic_timer(1) do
+  EM.add_periodic_timer(10) do
     websockets.each do |ws|
       ws.send "Ping #{count += 1}"
     end
   end
 
-  EM::WebSocket.run(:host => "0.0.0.0", :port => 1984, :debug => true) do |ws|
+  EM::WebSocket.run(:host => "0.0.0.0", :port => 1984, :debug => false) do |ws|
     ws.onopen { |handshake|
       puts "WebSocket opened #{{
         :path   => handshake.path,
@@ -21,14 +25,23 @@ EM.run {
         :origin => handshake.origin
       }}"
 
-      ws.send "Hello Client!"
-      websockets << ws
-    }
+      if handshake.path == "/sniffer"
+        ws.send "Hello Big Brother!"
+        sniffer = ws
+      else
+        websockets << ws
+      end
 
+    }
 
     ws.onmessage { |msg|
-      ws.send "Pong: #{msg}"
+      puts "Got message: #{msg}"
+      websockets.each do |ws|
+        ws.send "#{msg}"
+      end
+
     }
+
     ws.onclose {
       puts "WebSocket closed"
     }
@@ -36,7 +49,6 @@ EM.run {
       puts "Error: #{e.message}"
     }
   end
-
 }
 
 
