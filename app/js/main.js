@@ -107,11 +107,11 @@ var cocs = new CocsBackground();
 cocs.connect();
 
 $('.logo').click( function () {
-    $('.panel-3').removeClass('off-left off-right');
+    $('.panel-4').removeClass('off-left off-right');
 });
 
-$('.panel-3').click( function () {
-    $('.panel-3').addClass('off-right');
+$('.panel-4').click( function () {
+    $('.panel-4').addClass('off-right');
 });
 
 
