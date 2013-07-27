@@ -373,7 +373,7 @@ h1.logo {
   .data li {
     padding: 0 10px; }
     .data li:nth-child(odd) {
-      background-color: #f0faff; }
+      background-color: #fdf1f3; }
 
 .name,
 .site,
@@ -416,21 +416,75 @@ h1.mini-logo {
   background-color: white;
   width: 688px;
   height: 700px;
-  transition: left .3s; }
+  -webkit-transition: left .3s, right .3s;
+  left: 40px; }
   [class*="panel"].off-left {
     left: 768px; }
+  [class*="panel"].off-right {
+    left: -688px; }
 
-.panel-1 {
-  left: 40px; }
+.panel-2 .logo {
+  width: 400px;
+  margin-left: 144px;
+  margin-top: 30px; }
+.panel-2 h1 {
+  color: #e53451;
+  text-align: center;
+  font-size: 90px;
+  margin-top: 30px; }
 
-.panel-2 {
-  left: 40px; }
-  .panel-2 .logo {
-    width: 400px;
-    margin-left: 144px;
-    margin-top: 30px; }
-  .panel-2 h1 {
-    color: #E53451;
-    text-align: center;
+.panel-3 {
+  text-align: center; }
+  .panel-3 h1 {
+    color: #e53451;
+    font-weight: 900;
     font-size: 90px;
-    margin-top: 30px; }
+    letter-spacing: 3px;
+    margin-top: 50px; }
+  .panel-3 .alert {
+    width: 100%; }
+  .panel-3 h2 {
+    font-size: 36px; }
+  .panel-3 .deviant {
+    color: #e53451; }
+
+.alert-container {
+  width: 360px;
+  height: 360px;
+  margin: 20px auto 70px;
+  -webkit-animation: pulse .4s infinite alternate;
+  /* Safari 4+ */
+  -moz-animation: pulse .4s infinite alternate;
+  /* Fx 5+ */
+  -o-animation: pulse .4s infinite alternate;
+  /* Opera 12+ */
+  animation: pulse .4s infinite alternate;
+  /* IE 10+ */ }
+
+@-webkit-keyframes pulse {
+  0% {
+    padding: 0; }
+
+  100% {
+    padding: 30px; } }
+
+@-moz-keyframes pulse {
+  0% {
+    padding: 0; }
+
+  100% {
+    padding: 30px; } }
+
+@-o-keyframes pulse {
+  0% {
+    padding: 0; }
+
+  100% {
+    padding: 30px; } }
+
+@keyframes pulse {
+  0% {
+    padding: 0; }
+
+  100% {
+    padding: 30px; } }
