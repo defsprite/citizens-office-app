@@ -2,14 +2,24 @@
 
 require 'em-websocket'
 require 'json'
+require_relative 'mac_list.rb'
 
 websockets = []
 sniffer    = nil
 
-macs = {}
+macs = MacList.get_addresses
 ips  = {}
+pages = MacList.get_pages
+lastmsg = nil
 
 EM.run {
+
+  trap("INT") do
+    puts "Storing mac addresses and quitting."
+    MacList.store_addresses(macs)
+    MacList.store_pages(pages)
+    exit!
+  end
 
   EM::WebSocket.run(:host => "0.0.0.0", :port => 1984, :debug => false) do |ws|
     ws.onopen { |handshake|
@@ -41,10 +51,9 @@ EM.run {
 
         fields[3].match(/http:\/\/([A-Za-z\-0-9\.]+)\//) do |result|
           parts = result[1].split(".")
-          puts parts
           accessed_host = parts.size > 2 ? parts[-2..-1].join(".") : parts.join(".")
-          puts accessed_host
           name = macs[mac]
+          pages[mac] = info[accessed_host]
           {type: "http", ip: ip, mac: mac, name: name, host: accessed_host, time:time}
         end
       when 'MDNS'
@@ -54,14 +63,16 @@ EM.run {
         {}
       end
 
-      if !info.nil? && !info.empty?
+      if !info.nil? && !info.empty? && info != lastmsg
         res = JSON.generate(info)
         puts res
+
+        lastmsg = info
         websockets.each do |ws|
           ws.send res
         end
-      end
 
+      end
 
     }
 
@@ -74,5 +85,6 @@ EM.run {
     }
   end
 }
+
 
 
