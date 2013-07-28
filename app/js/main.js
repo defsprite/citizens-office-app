@@ -50,8 +50,12 @@ CocsBackground.prototype = {
         $(".panel-4 .data").prepend("<li><span class='site'>"+site[0]+"</span><span class='time'>"+site[1]+"</span></li>");
       }
 
-    },
+      $('.panel-4').removeClass('off-left off-right');
+      setTimeout(function() {
+        $('.panel-4').addClass('off-right');
+      }, 5000);
 
+    },
 
     _onmessage: function(event) {
         var msg = event.data ;
