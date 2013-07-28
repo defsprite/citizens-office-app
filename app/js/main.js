@@ -48,7 +48,7 @@ CocsBackground.prototype = {
     _onclose: function(e) {
         this.log('disconnected from ' + (e.target.URL || e.target.url));
         if (this.disconnectionReason == 'cannot-connect') {
-            this.alert('Cannot connect to server:\n' + this.uri);
+            // this.alert('Cannot connect to server:\n' + this.uri);
         }
         this.onDisconnect();
     },
@@ -99,19 +99,19 @@ CocsBackground.prototype = {
     },
 
     constructor: CocsBackground
-
 };
 
 
 var cocs = new CocsBackground();
 cocs.connect();
 
+
 $('.logo').click( function () {
-    $('.panel-4').removeClass('off-left off-right');
+    $('.panel-5').removeClass('off-left off-right');
 });
 
-$('.panel-4').click( function () {
-    $('.panel-4').addClass('off-right');
+$('.panel-5').click( function () {
+    $('.panel-5').addClass('off-right');
 });
 
 

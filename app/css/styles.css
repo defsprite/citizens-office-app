@@ -427,15 +427,34 @@ h1.mini-logo {
   [class*="panel"].off-right {
     left: -688px; }
 
+.blink {
+  position: absolute;
+  top: 228px;
+  left: 265px;
+  background-color: #e53451;
+  border-radius: 100px;
+  height: 140px;
+  width: 140px;
+  -webkit-animation: blink 6s infinite;
+  /* Safari 4+ */
+  -moz-animation: blink 6s infinite;
+  /* Fx 5+ */
+  -o-animation: blink 6s infinite;
+  /* Opera 12+ */
+  animation: blink 6s infinite;
+  /* IE 10+ */ }
+
 .panel-2 .logo {
   width: 400px;
   margin-left: 144px;
-  margin-top: 30px; }
+  margin-top: 40px;
+  z-index: 9999;
+  position: relative; }
 .panel-2 h1 {
   color: #e53451;
   text-align: center;
   font-size: 90px;
-  margin-top: 30px; }
+  margin-top: 20px; }
 
 .panel-3 {
   text-align: center; }
@@ -466,34 +485,6 @@ h1.mini-logo {
   animation: pulse .4s infinite alternate;
   /* IE 10+ */ }
 
-@-webkit-keyframes pulse {
-  0% {
-    padding: 0; }
-
-  100% {
-    padding: 30px; } }
-
-@-moz-keyframes pulse {
-  0% {
-    padding: 0; }
-
-  100% {
-    padding: 30px; } }
-
-@-o-keyframes pulse {
-  0% {
-    padding: 0; }
-
-  100% {
-    padding: 30px; } }
-
-@keyframes pulse {
-  0% {
-    padding: 0; }
-
-  100% {
-    padding: 30px; } }
-
 .panel-4 .user {
   background-color: #e53451;
   padding: 20px 24px;
@@ -511,3 +502,117 @@ h1.mini-logo {
   color: #e53451; }
 .panel-4 .data {
   height: 420px; }
+
+.panel-5 .logo {
+  width: 400px;
+  margin-left: 144px;
+  margin-top: 40px;
+  z-index: 9999;
+  position: relative;
+  margin-bottom: 30px; }
+.panel-5 h1 {
+  color: #e53451;
+  text-align: center;
+  font-size: 50px;
+  margin: 0;
+  line-height: 1; }
+
+.panel-6 .cloud-img {
+  float: left;
+  width: 30%;
+  position: relative; }
+.panel-6 .cloud {
+  position: absolute;
+  width: 260px; }
+.panel-6 .bolt-1,
+.panel-6 .bolt-2,
+.panel-6 .bolt-3 {
+  position: absolute;
+  top: 190px;
+  width: 30px; }
+.panel-6 .bolt-1 {
+  left: 58px;
+  -webkit-animation: flicker 2s infinite alternate;
+  /* Safari 4+ */
+  -moz-animation: flicker 2s infinite alternate;
+  /* Fx 5+ */
+  -o-animation: flicker 2s infinite alternate;
+  /* Opera 12+ */
+  animation: flicker 2s infinite alternate;
+  /* IE 10+ */ }
+.panel-6 .bolt-2 {
+  left: 111px;
+  width: 40px;
+  -webkit-animation: flicker 4s infinite alternate;
+  /* Safari 4+ */
+  -moz-animation: flicker 4s infinite alternate;
+  /* Fx 5+ */
+  -o-animation: flicker 4s infinite alternate;
+  /* Opera 12+ */
+  animation: flicker 4s infinite alternate;
+  /* IE 10+ */ }
+.panel-6 .bolt-3 {
+  left: 178px;
+  -webkit-animation: flicker 3s infinite alternate;
+  /* Safari 4+ */
+  -moz-animation: flicker 3s infinite alternate;
+  /* Fx 5+ */
+  -o-animation: flicker 3s infinite alternate;
+  /* Opera 12+ */
+  animation: flicker 3s infinite alternate;
+  /* IE 10+ */ }
+.panel-6 .info {
+  font-size: 24px;
+  text-align: right;
+  font-weight: 300;
+  width: 60%;
+  float: right;
+  margin-bottom: 120px; }
+.panel-6 .data {
+  width: 100%;
+  height: 300px; }
+
+@-webkit-keyframes pulse {
+  0% {
+    padding: 0; }
+
+  100% {
+    padding: 30px; } }
+
+@-webkit-keyframes blink {
+  0% {
+    top: 228px; }
+
+  4% {
+    top: 365px; }
+
+  8% {
+    top: 228px; }
+
+  100% {
+    top: 228px; } }
+
+@-webkit-keyframes flicker {
+  0% {
+    opacity: 1; }
+
+  4% {
+    opacity: 0.3; }
+
+  8% {
+    opacity: 1; }
+
+  32% {
+    opacity: 0.3; }
+
+  40% {
+    opacity: 1; }
+
+  66% {
+    opacity: 0.3; }
+
+  75% {
+    opacity: 1; }
+
+  100% {
+    opacity: 0.3; } }
