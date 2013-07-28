@@ -10,6 +10,7 @@ sniffer    = nil
 ips     = {}
 macs    = MacList.get_addresses
 pages   = MacList.get_pages
+delinquents = {}
 lastmsg = nil
 tick = 0
 
@@ -20,6 +21,8 @@ MESSAGES = ["safety > liberty",
   "If you want to keep a secret,\nyou must also hide it\nfrom yourself"]
 
 
+
+
 def create_citizen_info(macs, pages)
   mac = nil
   while(!macs.has_key?(mac)) do
@@ -28,10 +31,6 @@ def create_citizen_info(macs, pages)
 
   sites = pages[mac].sort{|a,b| a[1] <=> b[1]}
   {type: "citizen", mac: mac, name: macs[mac], pages: sites}
-end
-
-def create_public_info
-  {type: "info", message: MESSAGES.sample(1).first}
 end
 
 
@@ -47,11 +46,13 @@ EM.run {
   EM.add_periodic_timer(30) do
     tick += 1
 
-    info = case tick % 2
+    info = case tick % 3
     when 0
       create_citizen_info(macs, pages)
     when 1
-      create_public_info
+      {type: "info", message: MESSAGES.sample(1).first}
+    when 2
+      {type: "delinquents", people: delinquents.values }
     end
 
 
@@ -96,6 +97,7 @@ EM.run {
           name          = macs[mac]
           pages.has_key?(mac) ? pages[mac][accessed_host] = time : pages[mac] = {"#{accessed_host}" => time}
           if FILTERED.include?(accessed_host)
+            delinquents[mac] = [accessed_host, ip, name, time]
             {type: "alert", ip: ip, mac: mac, name: name, host: accessed_host, time: time}
           else
             {type: "http", ip: ip, mac: mac, name: name, host: accessed_host, time: time}

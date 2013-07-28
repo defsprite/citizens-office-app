@@ -454,14 +454,14 @@ h1.mini-logo {
   color: #e53451;
   text-align: center;
   font-size: 90px;
-  margin-top: 20px; }
-
+  margin-top: 20px;
+  line-height: 1; }
 .panel-2 h2 {
   color: #e53451;
   text-align: center;
   font-size: 50px;
-  margin-top: 10px; }
-
+  margin-top: 10px;
+  line-height: 0.8; }
 
 .panel-3 {
   text-align: center; }

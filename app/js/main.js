@@ -70,44 +70,66 @@ CocsBackground.prototype = {
       $('.panel-2').removeClass('off-left off-right');
       setTimeout(function() {
         $('.panel-2').addClass('off-right');
-      }, 7500);
+      }, 12000);
     },
 
-    showAlert: function(data) {
-        var name = data.name == null ? data.ip : data.name;
+    showAlert: function (data) {
+      var name = data.name == null ? data.ip : data.name;
 
-        $(".panel-3 span.deviant").text(name);
-        $('.panel-4').addClass('off-right');
+      $(".panel-3 span.deviant").text(name);
+      $('.panel-3').removeClass('off-left off-right');
+      setTimeout(function () {
+        $('.panel-3').addClass('off-right');
+      }, 7500);
+
+    },
+
+    showDelinquents: function (data) {
+      var i, info, name;
+
+      $('.panel-6').removeClass('off-left off-right');
+
+      $('.panel-6 .data li').remove();
+
+      for (i = 0; i < data.people.length; i++) {
+        info = data.people[i]
+        name = info[2] == null ? info[1] : info[2];
+        $(".panel-6 .data").prepend("<li><span class='site'>" + name + "</span> accessed deviant <span>"+ info[0] +"</span><span class='time'>"+info[3]+"</span></li>");
+      }
+
+      if(data.people.length == 0) {
+        $(".panel-6 .data").append("<li><span class='site'>No deviant information accesses so far.</span></li>")
+      }
 
 
-        $('.panel-3').removeClass('off-left off-right');
-        setTimeout(function() {
-          $('.panel-3').addClass('off-right');
-        }, 10000);
+      setTimeout(function () {
+        $('.panel-6').addClass('off-right');
+      }, 10000);
+    },
 
-      },
-
-    _onmessage: function(event) {
+  _onmessage: function(event) {
         var msg = event.data ;
         this.log('event: ' + event);
         this.log('msg: ' + msg);
         var data = JSON.parse(msg);
         this.log(data);
 
-        if(data.type == "http")  {
-          this.updateHttp(data);
-        }
-
-        if(data.type == "citizen")  {
-          this.showCitizen(data);
-        }
-
-        if(data.type == "alert")  {
-          this.showAlert(data);
-        }
-
-        if(data.type == "info")  {
-          this.showInfo(data);
+        switch(data.type) {
+          case "http":
+            this.updateHttp(data);
+            break;
+          case "citizen":
+            this.showCitizen(data);
+            break;
+          case "alert":
+            this.showAlert(data);
+            break;
+          case "info":
+            this.showInfo(data);
+            break;
+          case "delinquents":
+            this.showDelinquents(data);
+            break;
         }
 
     },
@@ -175,11 +197,11 @@ cocs.connect();
 
 
 $('.logo').click( function () {
-    $('.panel-2').removeClass('off-left off-right');
+    $('.panel-6').removeClass('off-left off-right');
 });
 
-$('.panel-2').click( function () {
-    $('.panel-2').addClass('off-right');
+$('.panel-6').click( function () {
+    $('.panel-6').addClass('off-right');
 });
 
 

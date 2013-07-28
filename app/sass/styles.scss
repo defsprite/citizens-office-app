@@ -7,7 +7,7 @@
 // MIXINS: define mixins for later use
 @import "_mixins";
 
-// FONTS: @font-face rules 
+// FONTS: @font-face rules
 @import "_fonts";
 
 // NORMALIZE: normalize.css from ttp://necolas.github.io/normalize.css/
@@ -18,7 +18,7 @@
 // ELEMENTS: styles for standard html elements
 @import "_elements";
 
-// HELPERS: helper classes. clear-fix etc 
+// HELPERS: helper classes. clear-fix etc
 @import "_helpers";
 
 // LAYOUT: grids, wraps etc
@@ -173,7 +173,17 @@ h1.mini-logo{
     text-align: center;
     font-size: 90px;
     margin-top: 20px;
+    line-height: 1;
   }
+
+  h2 {
+    color: $red;
+    text-align: center;
+    font-size: 50px;
+    margin-top: 10px;
+    line-height: 0.8;
+  }
+
 }
 
 .panel-3{
@@ -290,7 +300,7 @@ h1.mini-logo{
   }
 
   .bolt-2{
-    left: 111px; 
+    left: 111px;
     width: 40px;
     -webkit-animation: flicker 4s infinite alternate; /* Safari 4+ */
     -moz-animation:    flicker 4s infinite alternate; /* Fx 5+ */
