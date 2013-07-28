@@ -138,6 +138,23 @@ h1.mini-logo{
   }
 }
 
+.blink{
+  position: absolute;
+  top: 228px;
+  // closed 365px
+
+  left: 265px;
+  background-color: $red;
+  border-radius: 100px;
+  height: 140px;
+  width: 140px;
+
+  -webkit-animation: blink 6s infinite; /* Safari 4+ */
+  -moz-animation:    blink 6s infinite; /* Fx 5+ */
+  -o-animation:      blink 6s infinite; /* Opera 12+ */
+  animation:         blink 6s infinite; /* IE 10+ */
+}
+
 .panel-1{
 }
 
@@ -146,14 +163,16 @@ h1.mini-logo{
   .logo{
     width: 400px;
     margin-left: ((768px - 480) / 2);
-    margin-top: 30px;
+    margin-top: 40px;
+    z-index: 9999;
+    position: relative;
   }
 
   h1{
     color: $red;
     text-align: center;
     font-size: 90px;
-    margin-top: 30px;
+    margin-top: 20px;
   }
 }
 
@@ -193,26 +212,6 @@ h1.mini-logo{
   animation:         pulse .4s infinite alternate; /* IE 10+ */
 }
 
-@-webkit-keyframes pulse {
-  0%   { padding: 0; }
-  100% { padding: 30px; }
-}
-
-@-moz-keyframes pulse {
-  0%   { padding: 0; }
-  100% { padding: 30px; }
-}
-
-@-o-keyframes pulse {
-  0%   { padding: 0; }
-  100% { padding: 30px; }
-}
-
-@keyframes pulse {
-  0%   { padding: 0; }
-  100% { padding: 30px; }
-}
-
 .panel-4{
   .user{
     background-color: $red;
@@ -239,4 +238,36 @@ h1.mini-logo{
   .data{
     height: 420px;
   }
+}
+
+.panel-5{
+
+  .logo{
+    width: 400px;
+    margin-left: ((768px - 480) / 2);
+    margin-top: 40px;
+    z-index: 9999;
+    position: relative;
+    margin-bottom: 30px;
+  }
+
+  h1{
+    color: $red;
+    text-align: center;
+    font-size: 50px;
+    margin: 0;
+    line-height: 1;
+  }
+}
+
+@-webkit-keyframes pulse {
+  0%   { padding: 0; }
+  100% { padding: 30px; }
+}
+
+@-webkit-keyframes blink {
+  0%   { top: 228px; }
+  4% { top: 365px; }
+  8%   { top: 228px; }
+  100%   { top: 228px; }
 }
