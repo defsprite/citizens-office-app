@@ -7,9 +7,9 @@ require_relative 'mac_list.rb'
 websockets = []
 sniffer    = nil
 
-macs = MacList.get_addresses
+macs = MacList.get_addresses || {}
 ips  = {}
-pages = MacList.get_pages
+pages = MacList.get_pages || {}
 lastmsg = nil
 
 EM.run {
@@ -53,7 +53,7 @@ EM.run {
           parts = result[1].split(".")
           accessed_host = parts.size > 2 ? parts[-2..-1].join(".") : parts.join(".")
           name = macs[mac]
-          pages[mac] = info[accessed_host]
+          pages[mac] = accessed_host
           {type: "http", ip: ip, mac: mac, name: name, host: accessed_host, time:time}
         end
       when 'MDNS'
