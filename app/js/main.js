@@ -39,11 +39,12 @@ CocsBackground.prototype = {
     },
 
 
-    updateCitizen: function(data) {
+    showCitizen: function(data) {
       var name = data.name == null ? data.ip : data.name, site, i;
 
       $(".panel-4 span.name b").text(name);
       $(".panel-4 span.mac small").text(data.mac);
+      $(".panel-4 .data li").remove();
 
       for(i = 0; i < data.pages.length; i++) {
         site = data.pages[i]
@@ -53,9 +54,38 @@ CocsBackground.prototype = {
       $('.panel-4').removeClass('off-left off-right');
       setTimeout(function() {
         $('.panel-4').addClass('off-right');
-      }, 5000);
+      }, 7500);
 
     },
+
+    showInfo: function(data) {
+      var parts = data.message.split("\n"), html;
+      if(parts.length < 2) {
+        html = "<h1>" + parts.join("") + "</h1>"
+      } else {
+        html = "<h2>" + parts.join("</h2><h2>") + "</h2>"
+      }
+
+      $('.panel-2 .citizen-information').html(html);
+      $('.panel-2').removeClass('off-left off-right');
+      setTimeout(function() {
+        $('.panel-2').addClass('off-right');
+      }, 7500);
+    },
+
+    showAlert: function(data) {
+        var name = data.name == null ? data.ip : data.name;
+
+        $(".panel-3 span.deviant").text(name);
+        $('.panel-4').addClass('off-right');
+
+
+        $('.panel-3').removeClass('off-left off-right');
+        setTimeout(function() {
+          $('.panel-3').addClass('off-right');
+        }, 10000);
+
+      },
 
     _onmessage: function(event) {
         var msg = event.data ;
@@ -69,7 +99,15 @@ CocsBackground.prototype = {
         }
 
         if(data.type == "citizen")  {
-          this.updateCitizen(data);
+          this.showCitizen(data);
+        }
+
+        if(data.type == "alert")  {
+          this.showAlert(data);
+        }
+
+        if(data.type == "info")  {
+          this.showInfo(data);
         }
 
     },
@@ -125,6 +163,7 @@ CocsBackground.prototype = {
 
     onDisconnect: function() {
         this.socket = null;
+        setTimeout(function() {cocs.connect() }, 30000);
     },
 
     constructor: CocsBackground
@@ -136,11 +175,11 @@ cocs.connect();
 
 
 $('.logo').click( function () {
-    $('.panel-4').removeClass('off-left off-right');
+    $('.panel-2').removeClass('off-left off-right');
 });
 
-$('.panel-4').click( function () {
-    $('.panel-4').addClass('off-right');
+$('.panel-2').click( function () {
+    $('.panel-2').addClass('off-right');
 });
 
 

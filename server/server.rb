@@ -11,6 +11,29 @@ ips     = {}
 macs    = MacList.get_addresses
 pages   = MacList.get_pages
 lastmsg = nil
+tick = 0
+
+FILTERED = %w(reddit.com amazon.com 3-beards.com)
+MESSAGES = ["safety > liberty",
+  "If you have nothing to hide,\nyou have nothing to fear",
+  "Ignorance is strength",
+  "If you want to keep a secret,\nyou must also hide it\nfrom yourself"]
+
+
+def create_citizen_info(macs, pages)
+  mac = nil
+  while(!macs.has_key?(mac)) do
+    mac = pages.keys.sample(1)[0]
+  end
+
+  sites = pages[mac].sort{|a,b| a[1] <=> b[1]}
+  {type: "citizen", mac: mac, name: macs[mac], pages: sites}
+end
+
+def create_public_info
+  {type: "info", message: MESSAGES.sample(1).first}
+end
+
 
 EM.run {
 
@@ -21,14 +44,18 @@ EM.run {
     exit!
   end
 
-  EM.add_periodic_timer(10) do
-    mac = nil
-    while(!macs.has_key?(mac)) do
-      mac = pages.keys.sample(1)[0]
+  EM.add_periodic_timer(30) do
+    tick += 1
+
+    info = case tick % 2
+    when 0
+      create_citizen_info(macs, pages)
+    when 1
+      create_public_info
     end
 
-    sites = pages[mac].sort{|a,b| a[1] <=> b[1]}
-    info = {type: "citizen", mac: mac, name: macs[mac], pages: sites}
+
+    puts info
 
     websockets.each do |ws|
       ws.send JSON.generate(info)
@@ -68,7 +95,11 @@ EM.run {
           accessed_host = parts.size > 2 ? parts[-2..-1].join(".") : parts.join(".")
           name          = macs[mac]
           pages.has_key?(mac) ? pages[mac][accessed_host] = time : pages[mac] = {"#{accessed_host}" => time}
-          {type: "http", ip: ip, mac: mac, name: name, host: accessed_host, time: time}
+          if FILTERED.include?(accessed_host)
+            {type: "alert", ip: ip, mac: mac, name: name, host: accessed_host, time: time}
+          else
+            {type: "http", ip: ip, mac: mac, name: name, host: accessed_host, time: time}
+          end
         end
       when 'MDNS'
         macs[mac] = ips[ip] = fields[3]
