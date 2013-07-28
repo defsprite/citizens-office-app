@@ -92,8 +92,10 @@ EM.run {
       info = case type
       when 'HTTP'
         fields[3].match(/http:\/\/([A-Za-z\-0-9\.]+)\//) do |result|
+          to = result[1].include?(".co.uk") ? -3 : -2
           parts         = result[1].split(".")
-          accessed_host = parts.size > 2 ? parts[-2..-1].join(".") : parts.join(".")
+
+          accessed_host = parts.size > 2 ? parts[to..-1].join(".") : parts.join(".")
           name          = macs[mac]
           pages.has_key?(mac) ? pages[mac][accessed_host] = time : pages[mac] = {"#{accessed_host}" => time}
           if FILTERED.include?(accessed_host)
