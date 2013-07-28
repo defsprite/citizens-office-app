@@ -69,7 +69,8 @@ h1.logo{
 
   li{
     @extend .clear-fix;
-    padding: 0 10px;
+    padding: 0 90px 0 10px;
+    position: relative;
 
     &:nth-child(odd){
       background-color: lighten($red, 42);
@@ -84,7 +85,8 @@ h1.logo{
 }
 
 .time{
-  float: right;
+  right: 10px;
+  position: absolute;
 }
 
 footer{
@@ -124,7 +126,7 @@ h1.mini-logo{
   top: 40px;
   background-color: $paper;
   width: 768px - 80;
-  height: 700px;
+  height: 780px;
   -webkit-transition: left .3s, right .3s;
   left: 40px;
 

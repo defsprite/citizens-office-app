@@ -375,7 +375,8 @@ h1.logo {
   line-height: 1.6;
   margin-bottom: 80px; }
   .data li {
-    padding: 0 10px; }
+    padding: 0 90px 0 10px;
+    position: relative; }
     .data li:nth-child(odd) {
       background-color: #fdf1f3; }
 
@@ -385,7 +386,8 @@ h1.logo {
   font-weight: 600; }
 
 .time {
-  float: right; }
+  right: 10px;
+  position: absolute; }
 
 footer {
   height: 140px;
@@ -419,7 +421,7 @@ h1.mini-logo {
   top: 40px;
   background-color: white;
   width: 688px;
-  height: 700px;
+  height: 780px;
   -webkit-transition: left .3s, right .3s;
   left: 40px; }
   [class*="panel"].off-left {
