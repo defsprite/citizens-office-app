@@ -32,16 +32,23 @@ CocsBackground.prototype = {
     },
 
     _onmessage: function(event) {
-        var data = event.data;
+        var msg = event.data ;
         this.log('event: ' + event);
-        this.log('data: ' + data);
-        $(".data").prepend("<li>" + data + "</li>");
+        this.log('msg: ' + msg);
+        var data = JSON.parse(msg);
+        this.log(data);
+
+        if(data.type == "http")  {
+          var name = data.name == null ? data.ip : data.name
+          $(".data").prepend("<li><span class='name'>" + name + "</span> accessed <span class='site'>"+ data.host +" </span><span class='time'>" + data.time + "</span></li>");
+        }
+
     },
 
     _onclose: function(e) {
         this.log('disconnected from ' + (e.target.URL || e.target.url));
         if (this.disconnectionReason == 'cannot-connect') {
-            // this.alert('Cannot connect to server:\n' + this.uri);
+            this.alert('Cannot connect to server:\n' + this.uri);
         }
         this.onDisconnect();
     },
@@ -94,8 +101,10 @@ CocsBackground.prototype = {
     constructor: CocsBackground
 };
 
-// var cocs = new CocsBackground();
-// cocs.connect();
+
+var cocs = new CocsBackground();
+cocs.connect();
+
 
 $('.logo').click( function () {
     $('.panel-5').removeClass('off-left off-right');
@@ -104,5 +113,5 @@ $('.logo').click( function () {
 $('.panel-5').click( function () {
     $('.panel-5').addClass('off-right');
 });
-    
+
 
