@@ -7,9 +7,9 @@ require_relative 'mac_list.rb'
 websockets = []
 sniffer    = nil
 
-macs = MacList.get_addresses || {}
-ips  = {}
-pages = MacList.get_pages || {}
+ips     = {}
+macs    = MacList.get_addresses
+pages   = MacList.get_pages
 lastmsg = nil
 
 EM.run {
@@ -21,7 +21,22 @@ EM.run {
     exit!
   end
 
+  EM.add_periodic_timer(10) do
+    mac = nil
+    while(!macs.has_key?(mac)) do
+      mac = pages.keys.sample(1)[0]
+    end
+
+    sites = pages[mac].sort{|a,b| a[1] <=> b[1]}
+    info = {type: "citizen", mac: mac, name: macs[mac], pages: sites}
+
+    websockets.each do |ws|
+      ws.send JSON.generate(info)
+    end
+  end
+
   EM::WebSocket.run(:host => "0.0.0.0", :port => 1984, :debug => false) do |ws|
+
     ws.onopen { |handshake|
       puts "WebSocket opened #{{
         :path   => handshake.path,
@@ -48,13 +63,12 @@ EM.run {
 
       info = case type
       when 'HTTP'
-
         fields[3].match(/http:\/\/([A-Za-z\-0-9\.]+)\//) do |result|
-          parts = result[1].split(".")
+          parts         = result[1].split(".")
           accessed_host = parts.size > 2 ? parts[-2..-1].join(".") : parts.join(".")
-          name = macs[mac]
-          pages[mac] = accessed_host
-          {type: "http", ip: ip, mac: mac, name: name, host: accessed_host, time:time}
+          name          = macs[mac]
+          pages.has_key?(mac) ? pages[mac][accessed_host] = time : pages[mac] = {"#{accessed_host}" => time}
+          {type: "http", ip: ip, mac: mac, name: name, host: accessed_host, time: time}
         end
       when 'MDNS'
         macs[mac] = ips[ip] = fields[3]

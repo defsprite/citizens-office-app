@@ -1,4 +1,5 @@
 require 'csv'
+require 'json'
 
 class MacList
 
@@ -14,7 +15,7 @@ class MacList
 
   def self.store_addresses hash
     CSV.open("mac_addresses.csv", "wb") do |csv|
-      hash.each_pair do |k,v|
+      hash.each_pair do |k, v|
         csv << [k, v]
       end
     end
@@ -23,8 +24,8 @@ class MacList
 
   def self.get_pages
     result = {}
-    CSV.foreach("mac_pages.csv") do |row|
-      result[row[0]] = row[1]
+    File.open("pages.json", "r") do |f|
+      result = JSON.parse(f.readlines(hash).join(" "))
     end
 
     result
@@ -32,10 +33,8 @@ class MacList
 
 
   def self.store_pages hash
-    CSV.open("mac_pages.csv", "wb") do |csv|
-      hash.each_pair do |k,v|
-        csv << [k, v]
-      end
+    File.open("pages.json", "w") do |f|
+      f.write(JSON.generate(hash))
     end
   end
 
