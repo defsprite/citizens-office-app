@@ -517,6 +517,61 @@ h1.mini-logo {
   margin: 0;
   line-height: 1; }
 
+.panel-6 .cloud-img {
+  float: left;
+  width: 30%;
+  position: relative; }
+.panel-6 .cloud {
+  position: absolute;
+  width: 260px; }
+.panel-6 .bolt-1,
+.panel-6 .bolt-2,
+.panel-6 .bolt-3 {
+  position: absolute;
+  top: 190px;
+  width: 30px; }
+.panel-6 .bolt-1 {
+  left: 58px;
+  -webkit-animation: flicker 2s infinite alternate;
+  /* Safari 4+ */
+  -moz-animation: flicker 2s infinite alternate;
+  /* Fx 5+ */
+  -o-animation: flicker 2s infinite alternate;
+  /* Opera 12+ */
+  animation: flicker 2s infinite alternate;
+  /* IE 10+ */ }
+.panel-6 .bolt-2 {
+  left: 111px;
+  width: 40px;
+  -webkit-animation: flicker 4s infinite alternate;
+  /* Safari 4+ */
+  -moz-animation: flicker 4s infinite alternate;
+  /* Fx 5+ */
+  -o-animation: flicker 4s infinite alternate;
+  /* Opera 12+ */
+  animation: flicker 4s infinite alternate;
+  /* IE 10+ */ }
+.panel-6 .bolt-3 {
+  left: 178px;
+  -webkit-animation: flicker 3s infinite alternate;
+  /* Safari 4+ */
+  -moz-animation: flicker 3s infinite alternate;
+  /* Fx 5+ */
+  -o-animation: flicker 3s infinite alternate;
+  /* Opera 12+ */
+  animation: flicker 3s infinite alternate;
+  /* IE 10+ */ }
+.panel-6 .info {
+  font-size: 24px;
+  text-align: right;
+  font-weight: 300;
+  width: 60%;
+  float: right;
+  margin-bottom: 120px; }
+.panel-6 .data {
+  width: 100%;
+  height: 300px; }
+
 @-webkit-keyframes pulse {
   0% {
     padding: 0; }
@@ -536,3 +591,28 @@ h1.mini-logo {
 
   100% {
     top: 228px; } }
+
+@-webkit-keyframes flicker {
+  0% {
+    opacity: 1; }
+
+  4% {
+    opacity: 0.3; }
+
+  8% {
+    opacity: 1; }
+
+  32% {
+    opacity: 0.3; }
+
+  40% {
+    opacity: 1; }
+
+  66% {
+    opacity: 0.3; }
+
+  75% {
+    opacity: 1; }
+
+  100% {
+    opacity: 0.3; } }

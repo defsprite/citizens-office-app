@@ -48,7 +48,7 @@ CocsBackground.prototype = {
     _onclose: function(e) {
         this.log('disconnected from ' + (e.target.URL || e.target.url));
         if (this.disconnectionReason == 'cannot-connect') {
-            this.alert('Cannot connect to server:\n' + this.uri);
+            // this.alert('Cannot connect to server:\n' + this.uri);
         }
         this.onDisconnect();
     },
