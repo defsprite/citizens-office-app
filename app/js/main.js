@@ -13,7 +13,8 @@ CocsBackground.prototype = {
 
     // localhost does not work on Linux b/c of http://code.google.com/p/chromium/issues/detail?id=36652,
     // 0.0.0.0 does not work on Windows
-    host: (navigator.appVersion.indexOf('Linux') >= 0 ? '0.0.0.0' : 'localhost'),
+    //host: (navigator.appVersion.indexOf('Linux') >= 0 ? '0.0.0.0' : 'localhost'),
+    host: '172.17.17.143',
 
     port: 1984,
 
@@ -31,6 +32,31 @@ CocsBackground.prototype = {
         }
     },
 
+    updateHttp: function(data) {
+      var name = data.name == null ? data.ip : data.name
+      $(".panel-1 .data").prepend("<li><span class='name'>" + name + "</span> accessed <span class='site'>"+ data.host +" </span><span class='time'>" + data.time + "</span></li>");
+      $(".panel-1 .data li:last-child").remove();
+    },
+
+
+    updateCitizen: function(data) {
+      var name = data.name == null ? data.ip : data.name, site, i;
+
+      $(".panel-4 span.name b").text(name);
+      $(".panel-4 span.mac small").text(data.mac);
+
+      for(i = 0; i < data.pages.length; i++) {
+        site = data.pages[i]
+        $(".panel-4 .data").prepend("<li><span class='site'>"+site[0]+"</span><span class='time'>"+site[1]+"</span></li>");
+      }
+
+      $('.panel-4').removeClass('off-left off-right');
+      setTimeout(function() {
+        $('.panel-4').addClass('off-right');
+      }, 5000);
+
+    },
+
     _onmessage: function(event) {
         var msg = event.data ;
         this.log('event: ' + event);
@@ -39,8 +65,11 @@ CocsBackground.prototype = {
         this.log(data);
 
         if(data.type == "http")  {
-          var name = data.name == null ? data.ip : data.name
-          $(".data").prepend("<li><span class='name'>" + name + "</span> accessed <span class='site'>"+ data.host +" </span><span class='time'>" + data.time + "</span></li>");
+          this.updateHttp(data);
+        }
+
+        if(data.type == "citizen")  {
+          this.updateCitizen(data);
         }
 
     },
@@ -107,11 +136,11 @@ cocs.connect();
 
 
 $('.logo').click( function () {
-    $('.panel-5').removeClass('off-left off-right');
+    $('.panel-4').removeClass('off-left off-right');
 });
 
-$('.panel-5').click( function () {
-    $('.panel-5').addClass('off-right');
+$('.panel-4').click( function () {
+    $('.panel-4').addClass('off-right');
 });
 
 
