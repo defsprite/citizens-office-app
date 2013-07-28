@@ -14,7 +14,7 @@ delinquents = {}
 lastmsg = nil
 tick = 0
 
-FILTERED = %w(reddit.com amazon.com 3-beards.com)
+FILTERED = %w(reddit.com amazon.com 3-beards.com fsf.org ycombinator.com)
 MESSAGES = ["safety > liberty",
   "If you have nothing to hide,\nyou have nothing to fear",
   "Ignorance is strength",
