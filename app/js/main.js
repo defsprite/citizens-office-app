@@ -13,13 +13,23 @@ CocsBackground.prototype = {
 
     // localhost does not work on Linux b/c of http://code.google.com/p/chromium/issues/detail?id=36652,
     // 0.0.0.0 does not work on Windows
-    //host: (navigator.appVersion.indexOf('Linux') >= 0 ? '0.0.0.0' : 'localhost'),
-    host: '172.17.17.143',
-
+    host: (navigator.appVersion.indexOf('Linux') >= 0 ? '0.0.0.0' : 'localhost'),
+    //host: '172.17.17.143',
     port: 1984,
 
     get uri(){
-        return 'ws://' + this.host + ':' + this.port + '/websocket';
+      var parser = document.createElement('a');
+      parser.href = window.location;
+
+      // parser.protocol; // => "http:"
+      // parser.hostname; // => "example.com"
+      // parser.port;     // => "3000"
+      // parser.pathname; // => "/pathname/"
+      // parser.search;   // => "?search=test"
+      // parser.hash;     // => "#hash"
+      // parser.host;     // => "example.com:3000"
+
+        return 'ws://' + parser.hostname + ':' + this.port + '/websocket';
     },
 
     alert: function(message) {
