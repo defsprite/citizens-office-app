@@ -63,7 +63,7 @@ EM.run {
     end
   end
 
-  EM::WebSocket.run(:host => "0.0.0.0", :port => 1984, :debug => false) do |ws|
+  EM::WebSocket.run(:host => ARGV[0], :port => ARGV[1], :debug => false) do |ws|
 
     ws.onopen { |handshake|
       puts "WebSocket opened #{{
