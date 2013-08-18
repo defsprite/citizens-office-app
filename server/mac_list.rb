@@ -3,8 +3,7 @@ require 'json'
 
 class MacList
 
-  def self.get_addresses
-    result = {}
+  def self.load_addresses(result = {})
     CSV.foreach("mac_addresses.csv") do |row|
       result[row[0]] = row[1]
     end
@@ -22,8 +21,7 @@ class MacList
   end
 
 
-  def self.get_pages
-    result = {}
+  def self.load_pages(result = {})
     File.open("pages.json", "r") do |f|
       result = JSON.parse(f.readlines(hash).join(" "))
     end
