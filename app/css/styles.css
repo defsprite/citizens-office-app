@@ -1,4 +1,39 @@
 @charset "UTF-8";
+@font-face {
+  font-family: 'museo-sans';
+  src: url("/fonts/museosans_900-webfont.eot");
+  src: url("/fonts/museosans_900-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/museosans_900-webfont.woff") format("woff"), url("/fonts/museosans_900-webfont.ttf") format("truetype"), url("/fonts/museosans_900-webfont.svg#museo_sans900") format("svg");
+  font-weight: 900;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'museo-sans';
+  src: url("/fonts/museosans-100-webfont.eot");
+  src: url("/fonts/museosans-100-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/museosans-100-webfont.woff") format("woff"), url("/fonts/museosans-100-webfont.ttf") format("truetype"), url("/fonts/museosans-100-webfont.svg#museo_sans100") format("svg");
+  font-weight: 100;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'museo-sans';
+  src: url("/fonts/museosans-300-webfont.eot");
+  src: url("/fonts/museosans-300-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/museosans-300-webfont.woff") format("woff"), url("/fonts/museosans-300-webfont.ttf") format("truetype"), url("/fonts/museosans-300-webfont.svg#museo_sans300") format("svg");
+  font-weight: 300;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'museo-sans';
+  src: url("/fonts/museosans_500-webfont.eot");
+  src: url("/fonts/museosans_500-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/museosans_500-webfont.woff") format("woff"), url("/fonts/museosans_500-webfont.ttf") format("truetype"), url("/fonts/museosans_500-webfont.svg#museo_sans500") format("svg");
+  font-weight: 500;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'museo-sans';
+  src: url("/fonts/museosans_700-webfont.eot");
+  src: url("/fonts/museosans_700-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/museosans_700-webfont.woff") format("woff"), url("/fonts/museosans_700-webfont.ttf") format("truetype"), url("/fonts/museosans_700-webfont.svg#museo_sans700") format("svg");
+  font-weight: 700;
+  font-style: normal; }
+
 article,
 aside,
 details,
