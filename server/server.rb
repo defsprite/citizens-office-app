@@ -15,7 +15,8 @@ delinquents = SimpleHashRingBuffer.new
 lastmsg = nil
 tick = 0
 
-FILTERED = %w(reddit.com amazon.com 3-beards.com fsf.org ycombinator.com)
+FILTERED = %w(fsf.org eff.org wikileaks.org labour.org.uk amnesty.org.uk)
+
 MESSAGES = ["safety > liberty",
   "If you have nothing to hide,\nyou have nothing to fear",
   "Ignorance is strength",
@@ -92,7 +93,7 @@ EM.run {
       info = case type
       when 'HTTP'
         fields[3].match(/http:\/\/([A-Za-z\-0-9\.]+)/) do |result|
-          to = result[1].include?(".co.uk") ? -3 : -2
+          to = (result[1].include?(".co.uk")||result[1].include?(".org.uk")) ? -3 : -2
           parts         = result[1].split(".")
 
           accessed_host = parts.size > 2 ? parts[to..-1].join(".") : parts.join(".")
