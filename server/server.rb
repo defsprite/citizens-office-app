@@ -3,14 +3,15 @@
 require 'em-websocket'
 require 'json'
 require_relative 'mac_list.rb'
+require_relative 'simple_hash_ring_buffer.rb'
 
 websockets = []
 sniffer    = nil
 
-ips     = {}
-macs    = MacList.get_addresses
-pages   = MacList.get_pages
-delinquents = {}
+ips     = SimpleHashRingBuffer.new
+macs    = MacList.load_addresses(SimpleHashRingBuffer.new)
+pages   = MacList.load_pages(SimpleHashRingBuffer.new)
+delinquents = SimpleHashRingBuffer.new
 lastmsg = nil
 tick = 0
 
@@ -19,8 +20,6 @@ MESSAGES = ["safety > liberty",
   "If you have nothing to hide,\nyou have nothing to fear",
   "Ignorance is strength",
   "If you want to keep a secret,\nyou must also hide it\nfrom yourself"]
-
-
 
 
 def create_citizen_info(macs, pages)
@@ -48,6 +47,7 @@ EM.run {
 
     info = case tick % 3
     when 0
+      tick = 0 if tick >= 3
       create_citizen_info(macs, pages)
     when 1
       {type: "info", message: MESSAGES.sample(1).first}
@@ -63,7 +63,7 @@ EM.run {
     end
   end
 
-  EM::WebSocket.run(:host => "0.0.0.0", :port => 1984, :debug => false) do |ws|
+  EM::WebSocket.run(:host => ARGV[0], :port => ARGV[1], :debug => false) do |ws|
 
     ws.onopen { |handshake|
       puts "WebSocket opened #{{
@@ -91,7 +91,7 @@ EM.run {
 
       info = case type
       when 'HTTP'
-        fields[3].match(/http:\/\/([A-Za-z\-0-9\.]+)\//) do |result|
+        fields[3].match(/http:\/\/([A-Za-z\-0-9\.]+)/) do |result|
           to = result[1].include?(".co.uk") ? -3 : -2
           parts         = result[1].split(".")
 
@@ -111,6 +111,8 @@ EM.run {
       else
         {}
       end
+
+      puts info
 
       if !info.nil? && !info.empty? && info != lastmsg
         res = JSON.generate(info)
