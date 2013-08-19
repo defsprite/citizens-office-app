@@ -485,7 +485,6 @@ h1.mini-logo {
   width: 400px;
   margin-left: 144px;
   margin-top: 40px;
-  z-index: 9999;
   position: relative; }
 .panel-2 h1 {
   color: #e53451;
@@ -551,7 +550,6 @@ h1.mini-logo {
   width: 400px;
   margin-left: 144px;
   margin-top: 40px;
-  z-index: 9999;
   position: relative;
   margin-bottom: 30px; }
 .panel-5 h1 {
